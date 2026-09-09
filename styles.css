@@ -75,3 +75,63 @@ input::placeholder,textarea::placeholder{color:#aaa0a4;font-family:"Cormorant Ga
 footer{background:#100d13;color:#71646e;padding:22px clamp(24px,5vw,70px);display:flex;justify-content:space-between;font-size:8px;letter-spacing:.16em}footer span:last-child{color:var(--gold)}
 @media(max-width:900px){.intro-grid{grid-template-columns:1fr;gap:35px}.character-grid{grid-template-columns:repeat(2,1fr)}.form-shell{grid-template-columns:1fr}.form-side{min-height:360px}.side-content h2{font-size:43px}.side-bottom{margin-top:60px}}
 @media(max-width:600px){.hero{min-height:720px}.hero-content{padding-top:120px}.hero h1{font-size:58px}.nav a{display:none}.scroll-note{display:none}.section{padding:85px 20px}.character-grid{grid-template-columns:1fr 1fr}.character-card{min-height:180px;padding:18px}.char-symbol{font-size:34px}.radio-grid{grid-template-columns:1fr}.form-side{padding:30px;min-height:330px}.application-form{padding:38px 22px}.field-row{grid-template-columns:1fr;gap:0}.form-header h2{font-size:34px}.closing-card{padding:45px 25px}.closing-card h2{font-size:45px}footer{gap:12px;flex-wrap:wrap}}
+
+
+/* Character cards — visual portrait badges; replace these with PNGs when available */
+.character-section-title{
+  grid-column:1/-1;
+  margin:1.25rem 0 .1rem;
+  text-align:center;
+  font-family:"Cinzel",serif;
+  letter-spacing:.08em;
+  color:var(--gold,#C5A45D);
+  font-size:.9rem;
+}
+.character-portrait{
+  width:76px;height:92px;flex:0 0 76px;border-radius:14px;
+  display:grid;place-items:center;
+  font-family:"Cinzel",serif;font-weight:700;font-size:1.25rem;
+  color:#E8DCC4;border:1px solid rgba(197,164,93,.55);
+  background:linear-gradient(145deg,#49304F,#17121C);
+  box-shadow:inset 0 0 0 3px rgba(232,220,196,.08),0 8px 18px rgba(0,0,0,.2);
+  letter-spacing:.05em;
+}
+.character-card{display:flex!important;align-items:center;gap:1rem;text-align:left!important;}
+.character-card strong{display:block;}
+.character-card span{display:block;opacity:.72;font-size:.82rem;margin-top:.3rem;line-height:1.25;}
+.character-portrait.kitty,.character-portrait.maddie{background:linear-gradient(145deg,#581C2C,#49304F)}
+.character-portrait.cerise,.character-portrait.hunter,.character-portrait.sparrow{background:linear-gradient(145deg,#17121C,#581C2C)}
+.character-portrait.lizzie,.character-portrait.duchess,.character-portrait.daring{background:linear-gradient(145deg,#C5A45D,#581C2C);color:#17121C}
+.character-portrait.ashlynn,.character-portrait.rosabella,.character-portrait.dexter{background:linear-gradient(145deg,#E8DCC4,#49304F);color:#17121C}
+.character-portrait.darling,.character-portrait.alistair,.character-portrait.hopper{background:linear-gradient(145deg,#49304F,#17121C)}
+@media (max-width:650px){
+  .character-portrait{width:64px;height:80px;flex-basis:64px}
+}
+
+
+/* Seletor de personagens por gênero */
+.character-picker{margin-top:1rem}
+.gender-buttons{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:1rem 0}
+.gender-btn{
+  border:1px solid rgba(197,164,93,.55);
+  background:linear-gradient(145deg,rgba(73,48,79,.9),rgba(23,18,28,.95));
+  color:#E8DCC4;border-radius:14px;padding:1rem 1.2rem;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.65rem;
+  font-family:"Cinzel",serif;font-weight:700;letter-spacing:.05em;
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+}
+.gender-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.18)}
+.gender-btn.active{border-color:#C5A45D;box-shadow:0 0 0 2px rgba(197,164,93,.18),0 8px 22px rgba(0,0,0,.2);background:linear-gradient(145deg,#581C2C,#49304F)}
+.gender-icon{font-size:1.35rem;color:#C5A45D}
+.character-options{animation:characterFade .25s ease}
+.character-group-label{text-align:center;color:#C5A45D;font-family:"Cinzel",serif;font-size:.82rem;letter-spacing:.08em;margin:.9rem 0}
+.character-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem}
+.character-option{
+  border:1px solid rgba(197,164,93,.32);background:rgba(23,18,28,.72);
+  color:#E8DCC4;border-radius:10px;padding:.78rem .7rem;cursor:pointer;
+  font-family:"Cormorant Garamond",serif;font-size:1rem;transition:all .18s ease;
+}
+.character-option:hover,.character-option.selected{border-color:#C5A45D;background:#581C2C;transform:translateY(-1px)}
+.selected-character{text-align:center;min-height:1.3em;margin:.65rem 0 0;color:#C5A45D;font-size:.9rem}
+@keyframes characterFade{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:650px){.character-list{grid-template-columns:1fr}.gender-buttons{gap:.55rem}}
