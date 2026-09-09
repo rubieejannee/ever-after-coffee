@@ -17,7 +17,7 @@
   <div class="entry-screen" id="entryScreen">
     <div class="entry-card">
       <div class="tiny-crown">♛</div>
-      <p class="eyebrow">THE STORYBREW CAFÉ</p>
+      <p class="eyebrow">EVER AFTER COFFEE</p>
       <h1>Uma nova história<br><span>começa aqui.</span></h1>
       <p>Abra o livro, entre no café e descubra se o seu lugar está por trás do balcão.</p>
       <button class="gold-btn" id="enterBtn">Entrar no Café <span>→</span></button>
@@ -69,43 +69,52 @@
       <div class="section-label">02 / ESCOLHA SEU CAMINHO</div>
       <div class="section-heading">
         <p class="eyebrow">IF YOU COULD CHOOSE YOUR DESTINY...</p>
-        <h2>Qual personagem<br><span>seria você?</span></h2>
+        <h2>Qual personagem<br><span>escreveria seu capítulo?</span></h2>
       </div>
 
-      <div class="character-grid" id="characterGrid">
-        <button class="character-card" data-character="Apple White">
-          <span class="char-symbol">♛</span><span class="char-number">01</span>
-          <strong>Apple White</strong><small>ROYAL • DESTINY</small>
-        </button>
-        <button class="character-card" data-character="Raven Queen">
-          <span class="char-symbol">☾</span><span class="char-number">02</span>
-          <strong>Raven Queen</strong><small>REBEL • FREEDOM</small>
-        </button>
-        <button class="character-card" data-character="Madeline Hatter">
-          <span class="char-symbol">♧</span><span class="char-number">03</span>
-          <strong>Madeline Hatter</strong><small>WONDERLAND • WONDER</small>
-        </button>
-        <button class="character-card" data-character="Briar Beauty">
-          <span class="char-symbol">✿</span><span class="char-number">04</span>
-          <strong>Briar Beauty</strong><small>ROYAL • DREAMS</small>
-        </button>
-        <button class="character-card" data-character="Kitty Cheshire">
-          <span class="char-symbol">⌁</span><span class="char-number">05</span>
-          <strong>Kitty Cheshire</strong><small>WONDERLAND • MISCHIEF</small>
-        </button>
-        <button class="character-card" data-character="Cerise Hood">
-          <span class="char-symbol">♡</span><span class="char-number">06</span>
-          <strong>Cerise Hood</strong><small>REBEL • MYSTERY</small>
-        </button>
-        <button class="character-card" data-character="Lizzie Hearts">
-          <span class="char-symbol">♥</span><span class="char-number">07</span>
-          <strong>Lizzie Hearts</strong><small>WONDERLAND • HEARTS</small>
-        </button>
-        <button class="character-card" data-character="Darling Charming">
-          <span class="char-symbol">⚔</span><span class="char-number">08</span>
-          <strong>Darling Charming</strong><small>ROYAL • COURAGE</small>
-        </button>
-      </div>
+      
+<div class="character-picker">
+  <div class="gender-buttons" role="group" aria-label="Escolha o grupo de personagens">
+    <button class="gender-btn" type="button" data-gender="female" aria-pressed="false">
+      <span class="gender-icon">♀</span>
+      <span>Feminino</span>
+    </button>
+    <button class="gender-btn" type="button" data-gender="male" aria-pressed="false">
+      <span class="gender-icon">♂</span>
+      <span>Masculino</span>
+    </button>
+  </div>
+
+  <div class="character-options" id="femaleCharacters" hidden>
+    <p class="character-group-label">✦ Escolha sua personagem ✦</p>
+    <div class="character-list">
+      <button class="character-option" type="button" data-character="Kitty Cheshire">Kitty Cheshire</button>
+      <button class="character-option" type="button" data-character="Madeline Hatter">Madeline Hatter</button>
+      <button class="character-option" type="button" data-character="Cerise Hood">Cerise Hood</button>
+      <button class="character-option" type="button" data-character="Lizzie Hearts">Lizzie Hearts</button>
+      <button class="character-option" type="button" data-character="Darling Charming">Darling Charming</button>
+      <button class="character-option" type="button" data-character="Ashlynn Ella">Ashlynn Ella</button>
+      <button class="character-option" type="button" data-character="Duchess Swan">Duchess Swan</button>
+      <button class="character-option" type="button" data-character="Rosabella Beauty">Rosabella Beauty</button>
+    </div>
+  </div>
+
+  <div class="character-options" id="maleCharacters" hidden>
+    <p class="character-group-label">✦ Escolha seu personagem ✦</p>
+    <div class="character-list">
+      <button class="character-option" type="button" data-character="Hunter Huntsman">Hunter Huntsman</button>
+      <button class="character-option" type="button" data-character="Daring Charming">Daring Charming</button>
+      <button class="character-option" type="button" data-character="Dexter Charming">Dexter Charming</button>
+      <button class="character-option" type="button" data-character="Alistair Wonderland">Alistair Wonderland</button>
+      <button class="character-option" type="button" data-character="Hopper Croakington II">Hopper Croakington II</button>
+      <button class="character-option" type="button" data-character="Sparrow Hood">Sparrow Hood</button>
+    </div>
+  </div>
+
+  <input type="hidden" id="character" name="character" required>
+  <p class="selected-character" id="selectedCharacter" aria-live="polite"></p>
+</div>
+
       <p class="selection-hint">Clique em uma carta para preencher sua escolha no formulário.</p>
     </section>
 
@@ -119,7 +128,7 @@
             <p>Preencha os campos ao lado. Sua inscrição será encaminhada para a equipe do Ever After Coffee.</p>
           </div>
           <div class="side-bottom">
-            <span>THE STORYBREW CAFÉ</span>
+            <span>EVER AFTER COFFEE</span>
             <span>EST. 2026</span>
           </div>
         </aside>
@@ -197,6 +206,10 @@
     <span>A LITTLE MAGIC BETWEEN CHAPTERS</span>
     <span>♛ 2026</span>
   </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
 
   <script src="script.js"></script>
 </body>
