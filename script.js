@@ -90,3 +90,38 @@ form.addEventListener("submit", async (event) => {
     submit.querySelector("span").textContent = "Enviar candidatura";
   }
 });
+
+
+/* Seletor de personagens por categoria */
+document.addEventListener("DOMContentLoaded", () => {
+  const genderButtons = document.querySelectorAll(".gender-btn");
+  const femaleBox = document.getElementById("femaleCharacters");
+  const maleBox = document.getElementById("maleCharacters");
+  const characterInput = document.getElementById("character");
+  const selected = document.getElementById("selectedCharacter");
+
+  genderButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const gender = btn.dataset.gender;
+      genderButtons.forEach(b => {
+        const active = b === btn;
+        b.classList.toggle("active", active);
+        b.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+      femaleBox.hidden = gender !== "female";
+      maleBox.hidden = gender !== "male";
+      document.querySelectorAll(".character-option").forEach(opt => opt.classList.remove("selected"));
+      characterInput.value = "";
+      selected.textContent = "";
+    });
+  });
+
+  document.querySelectorAll(".character-option").forEach(option => {
+    option.addEventListener("click", () => {
+      document.querySelectorAll(".character-option").forEach(opt => opt.classList.remove("selected"));
+      option.classList.add("selected");
+      characterInput.value = option.dataset.character;
+      selected.textContent = "✓ " + option.dataset.character + " selecionado(a)";
+    });
+  });
+});
