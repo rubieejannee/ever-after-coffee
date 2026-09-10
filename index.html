@@ -10,20 +10,223 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+
 <style>
-.character-picker{margin-top:1.25rem;position:relative}.character-open-btn{width:100%;display:flex;align-items:center;gap:1rem;padding:1.05rem 1.15rem;border:1px solid rgba(197,164,93,.38);background:linear-gradient(145deg,rgba(88,28,44,.78),rgba(73,48,79,.65));color:#E8DCC4;font-family:Cinzel,serif;text-transform:uppercase;letter-spacing:.08em;cursor:pointer;transition:.25s;box-shadow:0 10px 30px rgba(0,0,0,.12)}.character-open-btn:hover{transform:translateY(-2px);border-color:#C5A45D;box-shadow:0 14px 32px rgba(0,0,0,.22)}.character-open-icon{color:#C5A45D;font-size:1.25rem}.character-open-arrow{margin-left:auto;color:#C5A45D;font-size:1.25rem}.character-panel{margin-top:.8rem;padding:1.25rem;border:1px solid rgba(197,164,93,.25);background:rgba(23,18,28,.97);box-shadow:0 20px 50px rgba(0,0,0,.28);animation:characterPanelIn .22s ease}.character-panel-head{display:flex;gap:1rem;justify-content:space-between;align-items:flex-start;margin-bottom:1rem}.character-panel-head h3{margin:.25rem 0;color:#E8DCC4;font-family:Cormorant Garamond,serif;font-size:1.65rem}.character-panel-head p:last-child{margin:0;color:#bcaeb7;font-size:.88rem;line-height:1.5}.character-close-btn{border:1px solid rgba(197,164,93,.35);background:transparent;color:#C5A45D;width:38px;height:38px;font-size:1.5rem;cursor:pointer}.character-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem}.character-choice{display:grid;grid-template-columns:35px 1fr 20px;align-items:center;gap:.5rem;text-align:left;padding:.78rem .8rem;border:1px solid rgba(197,164,93,.18);background:rgba(73,48,79,.18);color:#E8DCC4;cursor:pointer;transition:.2s;min-width:0}.character-choice:hover{border-color:#C5A45D;background:rgba(88,28,44,.7);transform:translateY(-1px)}.character-number{font-family:Cinzel,serif;color:#C5A45D;font-size:.72rem}.character-name{font-family:Cormorant Garamond,serif;font-size:1.08rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.character-arrow{color:#C5A45D;text-align:right}.character-empty{text-align:center;color:#C5A45D;padding:1.2rem}.selected-character{text-align:center;min-height:1.3em;margin:.75rem 0 0;color:#C5A45D;font-size:.92rem}.selected-character.has-selection{padding:.65rem;border:1px solid rgba(197,164,93,.25);background:rgba(88,28,44,.2)}.selection-hint{margin-top:.8rem}.character-group-label{margin:0;color:#C5A45D;font-family:Cinzel,serif;font-size:.75rem;letter-spacing:.08em}@keyframes characterPanelIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}@media(max-width:650px){.character-list{grid-template-columns:1fr}.character-panel{padding:.9rem}.character-choice{padding:.85rem .7rem}.character-name{font-size:1.02rem}.character-open-btn{font-size:.78rem}}
+.character-picker{
+  margin-top:1.25rem;
+  position:relative
+}
+
+.character-open-btn{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  padding:1.05rem 1.15rem;
+  border:1px solid rgba(197,164,93,.38);
+  background:linear-gradient(145deg,rgba(88,28,44,.78),rgba(73,48,79,.65));
+  color:#E8DCC4;
+  font-family:Cinzel,serif;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  cursor:pointer;
+  transition:.25s;
+  box-shadow:0 10px 30px rgba(0,0,0,.12)
+}
+
+.character-open-btn:hover{
+  transform:translateY(-2px);
+  border-color:#C5A45D;
+  box-shadow:0 14px 32px rgba(0,0,0,.22)
+}
+
+.character-open-icon{
+  color:#C5A45D;
+  font-size:1.25rem
+}
+
+.character-open-arrow{
+  margin-left:auto;
+  color:#C5A45D;
+  font-size:1.25rem
+}
+
+.character-panel{
+  margin-top:.8rem;
+  padding:1.25rem;
+  border:1px solid rgba(197,164,93,.25);
+  background:rgba(23,18,28,.97);
+  box-shadow:0 20px 50px rgba(0,0,0,.28);
+  animation:characterPanelIn .22s ease
+}
+
+.character-panel-head{
+  display:flex;
+  gap:1rem;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:1rem
+}
+
+.character-panel-head h3{
+  margin:.25rem 0;
+  color:#E8DCC4;
+  font-family:Cormorant Garamond,serif;
+  font-size:1.65rem
+}
+
+.character-panel-head p:last-child{
+  margin:0;
+  color:#bcaeb7;
+  font-size:.88rem;
+  line-height:1.5
+}
+
+.character-close-btn{
+  border:1px solid rgba(197,164,93,.35);
+  background:transparent;
+  color:#C5A45D;
+  width:38px;
+  height:38px;
+  font-size:1.5rem;
+  cursor:pointer
+}
+
+.character-list{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:.55rem
+}
+
+.character-choice{
+  display:grid;
+  grid-template-columns:35px 1fr 20px;
+  align-items:center;
+  gap:.5rem;
+  text-align:left;
+  padding:.78rem .8rem;
+  border:1px solid rgba(197,164,93,.18);
+  background:rgba(73,48,79,.18);
+  color:#E8DCC4;
+  cursor:pointer;
+  transition:.2s;
+  min-width:0
+}
+
+.character-choice:hover{
+  border-color:#C5A45D;
+  background:rgba(88,28,44,.7);
+  transform:translateY(-1px)
+}
+
+.character-number{
+  font-family:Cinzel,serif;
+  color:#C5A45D;
+  font-size:.72rem
+}
+
+.character-name{
+  font-family:Cormorant Garamond,serif;
+  font-size:1.08rem;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis
+}
+
+.character-arrow{
+  color:#C5A45D;
+  text-align:right
+}
+
+.character-empty{
+  text-align:center;
+  color:#C5A45D;
+  padding:1.2rem
+}
+
+.selected-character{
+  text-align:center;
+  min-height:1.3em;
+  margin:.75rem 0 0;
+  color:#C5A45D;
+  font-size:.92rem
+}
+
+.selected-character.has-selection{
+  padding:.65rem;
+  border:1px solid rgba(197,164,93,.25);
+  background:rgba(88,28,44,.2)
+}
+
+.selection-hint{
+  margin-top:.8rem
+}
+
+.character-group-label{
+  margin:0;
+  color:#C5A45D;
+  font-family:Cinzel,serif;
+  font-size:.75rem;
+  letter-spacing:.08em
+}
+
+@keyframes characterPanelIn{
+  from{
+    opacity:0;
+    transform:translateY(-6px)
+  }
+  to{
+    opacity:1;
+    transform:translateY(0)
+  }
+}
+
+@media(max-width:650px){
+  .character-list{
+    grid-template-columns:1fr
+  }
+
+  .character-panel{
+    padding:.9rem
+  }
+
+  .character-choice{
+    padding:.85rem .7rem
+  }
+
+  .character-name{
+    font-size:1.02rem
+  }
+
+  .character-open-btn{
+    font-size:.78rem
+  }
+}
 </style>
 </head>
+
 <body>
+
   <div class="grain"></div>
 
   <div class="entry-screen" id="entryScreen">
     <div class="entry-card">
       <div class="tiny-crown">♛</div>
       <p class="eyebrow">EVER AFTER COFFEE</p>
-      <h1>Uma nova história<br><span>começa aqui.</span></h1>
-      <p>Abra o livro, entre no café e descubra se o seu lugar está por trás do balcão.</p>
-      <button class="gold-btn" id="enterBtn">Entrar no Café <span>→</span></button>
+
+      <h1>
+        Uma nova história<br>
+        <span>começa aqui.</span>
+      </h1>
+
+      <p>
+        Abra o livro, entre no café e descubra se o seu lugar está por trás do balcão.
+      </p>
+
+      <button class="gold-btn" id="enterBtn">
+        Entrar no Café <span>→</span>
+      </button>
+
       <small>♪ A trilha da casa começa ao entrar</small>
     </div>
   </div>
@@ -38,154 +241,482 @@
   </button>
 
   <header class="hero">
+
     <div class="hero-art"></div>
     <div class="hero-overlay"></div>
+
     <nav class="nav">
-      <div class="brand-mini"><span>♛</span> EVER AFTER <b>COFFEE</b></div>
-      <a href="#inscricao">Candidatar-se <span>↗</span></a>
+      <div class="brand-mini">
+        <span>♛</span> EVER AFTER <b>COFFEE</b>
+      </div>
+
+      <a href="#inscricao">
+        Candidatar-se <span>↗</span>
+      </a>
     </nav>
+
     <div class="hero-content">
-      <p class="eyebrow">✦ OPENING A NEW CHAPTER ✦</p>
-      <h1>Seu lugar na<br><em>nossa história.</em></h1>
-      <p class="hero-copy">O Ever After Coffee está procurando pessoas que tragam personalidade, encanto e boas histórias para cada mesa.</p>
-      <a class="gold-btn" href="#inscricao">Escrever meu capítulo <span>↓</span></a>
+
+      <p class="eyebrow">
+        ✦ OPENING A NEW CHAPTER ✦
+      </p>
+
+      <h1>
+        Seu lugar na<br>
+        <em>nossa história.</em>
+      </h1>
+
+      <p class="hero-copy">
+        O Ever After Coffee está procurando pessoas que tragam personalidade,
+        encanto e boas histórias para cada mesa.
+      </p>
+
+      <a class="gold-btn" href="#inscricao">
+        Escrever meu capítulo <span>↓</span>
+      </a>
+
     </div>
-    <div class="scroll-note">SCROLL TO DISCOVER <span>↓</span></div>
+
+    <div class="scroll-note">
+      SCROLL TO DISCOVER <span>↓</span>
+    </div>
+
   </header>
 
   <main>
+
     <section class="intro section">
-      <div class="section-label">01 / O CAFÉ</div>
-      <div class="intro-grid">
-        <div>
-          <p class="eyebrow">EVERY CUP HAS A STORY</p>
-          <h2>Não procuramos<br><span>apenas funcionários.</span></h2>
-        </div>
-        <div class="intro-text">
-          <p>Procuramos personagens para fazer parte do universo do <strong>Ever After Coffee</strong>. Pessoas criativas, responsáveis e dispostas a transformar cada atendimento em uma pequena cena de conto de fadas.</p>
-          <p>Conte quem você é, quando está disponível e qual personagem de <strong>Ever After High</strong> viveria o seu capítulo.</p>
-        </div>
+
+      <div class="section-label">
+        01 / O CAFÉ
       </div>
+
+      <div class="intro-grid">
+
+        <div>
+          <p class="eyebrow">
+            EVERY CUP HAS A STORY
+          </p>
+
+          <h2>
+            Não procuramos<br>
+            <span>apenas funcionários.</span>
+          </h2>
+        </div>
+
+        <div class="intro-text">
+
+          <p>
+            Procuramos personagens para fazer parte do universo do
+            <strong>Ever After Coffee</strong>.
+            Pessoas criativas, responsáveis e dispostas a transformar cada
+            atendimento em uma pequena cena de conto de fadas.
+          </p>
+
+          <p>
+            Conte quem você é, quando está disponível e qual personagem de
+            <strong>Ever After High</strong> viveria o seu capítulo.
+          </p>
+
+        </div>
+
+      </div>
+
     </section>
 
     <section class="characters section">
-      <div class="section-label">02 / ESCOLHA SEU CAMINHO</div>
+
+      <div class="section-label">
+        02 / ESCOLHA SEU CAMINHO
+      </div>
+
       <div class="section-heading">
-        <p class="eyebrow">IF YOU COULD CHOOSE YOUR DESTINY...</p>
-        <h2>Qual personagem<br><span>escreveria seu capítulo?</span></h2>
+
+        <p class="eyebrow">
+          IF YOU COULD CHOOSE YOUR DESTINY...
+        </p>
+
+        <h2>
+          Qual personagem<br>
+          <span>escreveria seu capítulo?</span>
+        </h2>
+
       </div>
 
-      
-<div class="character-picker" id="characterPicker">
-  <button class="character-open-btn" id="characterOpenBtn" type="button" aria-expanded="false">
-    <span class="character-open-icon">♛</span>
-    <span>Escolher personagem</span>
-    <span class="character-open-arrow">↓</span>
-  </button>
+      <div class="character-picker" id="characterPicker">
 
-  <div class="character-panel" id="characterPanel" hidden>
-    <div class="character-panel-head">
-      <div>
-        <p class="character-group-label">✦ THE EVER AFTER BOOK ✦</p>
-        <h3>Escolha o personagem da sua história</h3>
-        <p>Os personagens já escolhidos por outras pessoas desaparecem da lista automaticamente.</p>
+        <button
+          class="character-open-btn"
+          id="characterOpenBtn"
+          type="button"
+          aria-expanded="false"
+        >
+          <span class="character-open-icon">♛</span>
+          <span>Escolher personagem</span>
+          <span class="character-open-arrow">↓</span>
+        </button>
+
+        <div
+          class="character-panel"
+          id="characterPanel"
+          hidden
+        >
+
+          <div class="character-panel-head">
+
+            <div>
+
+              <p class="character-group-label">
+                ✦ THE EVER AFTER BOOK ✦
+              </p>
+
+              <h3>
+                Escolha o personagem da sua história
+              </h3>
+
+              <p>
+                Os personagens já escolhidos por outras pessoas desaparecem da lista automaticamente.
+              </p>
+
+            </div>
+
+            <button
+              class="character-close-btn"
+              id="characterCloseBtn"
+              type="button"
+              aria-label="Fechar lista"
+            >
+              ×
+            </button>
+
+          </div>
+
+          <div
+            class="character-list"
+            id="characterList"
+            aria-live="polite"
+          ></div>
+
+          <p
+            class="character-empty"
+            id="characterEmpty"
+            hidden
+          >
+            Todos os personagens disponíveis já foram escolhidos.
+          </p>
+
+        </div>
+
+        <p
+          class="selected-character"
+          id="selectedCharacter"
+          aria-live="polite"
+        ></p>
+
       </div>
-      <button class="character-close-btn" id="characterCloseBtn" type="button" aria-label="Fechar lista">×</button>
-    </div>
-    <div class="character-list" id="characterList" aria-live="polite"></div>
-    <p class="character-empty" id="characterEmpty" hidden>Todos os personagens disponíveis já foram escolhidos.</p>
-  </div>
 
-  <input type="hidden" id="character" name="personagem">
-  <p class="selected-character" id="selectedCharacter" aria-live="polite"></p>
-</div>
+      <p class="selection-hint">
+        Clique em uma carta para preencher sua escolha no formulário.
+      </p>
 
-<p class="selection-hint">Clique em uma carta para preencher sua escolha no formulário.</p>
     </section>
 
+
     <section class="form-section section" id="inscricao">
+
       <div class="form-shell">
+
         <aside class="form-side">
-          <div class="side-top">03 / SUA CANDIDATURA</div>
-          <div class="side-content">
-            <span class="ornament">♛</span>
-            <h2>Escreva seu<br><em>capítulo.</em></h2>
-            <p>Preencha os campos ao lado. Sua inscrição será encaminhada para a equipe do Ever After Coffee.</p>
+
+          <div class="side-top">
+            03 / SUA CANDIDATURA
           </div>
+
+          <div class="side-content">
+
+            <span class="ornament">♛</span>
+
+            <h2>
+              Escreva seu<br>
+              <em>capítulo.</em>
+            </h2>
+
+            <p>
+              Preencha os campos ao lado.
+              Sua inscrição será encaminhada para a equipe do Ever After Coffee.
+            </p>
+
+          </div>
+
           <div class="side-bottom">
             <span>THE STORYBREW CAFÉ</span>
             <span>EST. 2026</span>
           </div>
+
         </aside>
 
+
         <form id="applicationForm" class="application-form">
+
+          <!-- CAMPO DO PERSONAGEM -->
+          <!-- Agora está DENTRO do formulário para ser enviado à planilha -->
+          <input
+            type="hidden"
+            id="character"
+            name="personagem"
+            value=""
+          >
+
           <div class="form-header">
-            <p class="eyebrow">NEW CHARACTER APPLICATION</p>
-            <h2>Ficha de <span>personagem</span></h2>
-            <p>Os campos marcados com <b>*</b> são obrigatórios.</p>
+
+            <p class="eyebrow">
+              NEW CHARACTER APPLICATION
+            </p>
+
+            <h2>
+              Ficha de <span>personagem</span>
+            </h2>
+
+            <p>
+              Os campos marcados com <b>*</b> são obrigatórios.
+            </p>
+
           </div>
+
 
           <div class="field-row">
+
             <label class="field">
-              <span>01. Seu nome <b>*</b></span>
-              <input name="nome" type="text" placeholder="Como devemos chamar você?" required maxlength="120">
+
+              <span>
+                01. Seu nome <b>*</b>
+              </span>
+
+              <input
+                name="nome"
+                type="text"
+                placeholder="Como devemos chamar você?"
+                required
+                maxlength="120"
+              >
+
             </label>
+
+
             <label class="field">
-              <span>02. @ do Telegram <b>*</b></span>
-              <input name="telegram" type="text" placeholder="@seuusuario" required maxlength="80">
+
+              <span>
+                02. @ do Telegram <b>*</b>
+              </span>
+
+              <input
+                name="telegram"
+                type="text"
+                placeholder="@seuusuario"
+                required
+                maxlength="80"
+              >
+
             </label>
+
           </div>
 
-          <div class="field">
-            <span>03. Disponibilidade <b>*</b></span>
-            <p class="field-help">Informe os dias e horários em que você pode atuar.</p>
-            <textarea name="disponibilidade" rows="4" placeholder="Ex.: Segunda a sexta, 18h às 23h. Sábados, período integral." required maxlength="1000"></textarea>
-          </div>
 
           <div class="field">
-            <span>04. Você já tem experiência? <b>*</b></span>
+
+            <span>
+              03. Disponibilidade <b>*</b>
+            </span>
+
+            <p class="field-help">
+              Informe os dias e horários em que você pode atuar.
+            </p>
+
+            <textarea
+              name="disponibilidade"
+              rows="4"
+              placeholder="Ex.: Segunda a sexta, 18h às 23h. Sábados, período integral."
+              required
+              maxlength="1000"
+            ></textarea>
+
+          </div>
+
+
+          <div class="field">
+
+            <span>
+              04. Você já tem experiência? <b>*</b>
+            </span>
+
             <div class="radio-grid">
-              <label class="radio-card"><input type="radio" name="experiencia" value="Sim" required><span>Sim</span><small>Já trabalhei em algo parecido.</small></label>
-              <label class="radio-card"><input type="radio" name="experiencia" value="Não"><span>Não</span><small>Seria minha primeira experiência.</small></label>
-              <label class="radio-card"><input type="radio" name="experiencia" value="Um pouco"><span>Um pouco</span><small>Tenho alguma experiência.</small></label>
+
+              <label class="radio-card">
+
+                <input
+                  type="radio"
+                  name="experiencia"
+                  value="Sim"
+                  required
+                >
+
+                <span>Sim</span>
+
+                <small>
+                  Já trabalhei em algo parecido.
+                </small>
+
+              </label>
+
+
+              <label class="radio-card">
+
+                <input
+                  type="radio"
+                  name="experiencia"
+                  value="Não"
+                >
+
+                <span>Não</span>
+
+                <small>
+                  Seria minha primeira experiência.
+                </small>
+
+              </label>
+
+
+              <label class="radio-card">
+
+                <input
+                  type="radio"
+                  name="experiencia"
+                  value="Um pouco"
+                >
+
+                <span>Um pouco</span>
+
+                <small>
+                  Tenho alguma experiência.
+                </small>
+
+              </label>
+
             </div>
+
           </div>
-<label class="field">
-            <span>06. Conte um pouco sobre você <i>opcional</i></span>
-            <textarea name="sobre" rows="4" placeholder="Personalidade, habilidades, por que gostaria de entrar para a equipe..." maxlength="1500"></textarea>
+
+
+          <label class="field">
+
+            <span>
+              06. Conte um pouco sobre você
+              <i>opcional</i>
+            </span>
+
+            <textarea
+              name="sobre"
+              rows="4"
+              placeholder="Personalidade, habilidades, por que gostaria de entrar para a equipe..."
+              maxlength="1500"
+            ></textarea>
+
           </label>
+
 
           <label class="checkline">
-            <input type="checkbox" name="consentimento" required>
-            <span>Confirmo que as informações acima estão corretas e autorizo o contato pelo Telegram informado. <b>*</b></span>
+
+            <input
+              type="checkbox"
+              name="consentimento"
+              required
+            >
+
+            <span>
+              Confirmo que as informações acima estão corretas e autorizo o contato pelo Telegram informado.
+              <b>*</b>
+            </span>
+
           </label>
 
-          <button class="submit-btn" type="submit">
-            <span>Enviar candidatura</span><strong>→</strong>
+
+          <button
+            class="submit-btn"
+            type="submit"
+          >
+
+            <span>
+              Enviar candidatura
+            </span>
+
+            <strong>
+              →
+            </strong>
+
           </button>
 
-          <p class="form-status" id="formStatus" role="status"></p>
-          <p class="privacy-note">Suas respostas são usadas apenas para a seleção da equipe do Ever After Coffee.</p>
+
+          <p
+            class="form-status"
+            id="formStatus"
+            role="status"
+          ></p>
+
+          <p class="privacy-note">
+            Suas respostas são usadas apenas para a seleção da equipe do Ever After Coffee.
+          </p>
+
         </form>
+
       </div>
+
     </section>
+
 
     <section class="closing section">
+
       <div class="closing-card">
+
         <span>✦</span>
-        <h2>Every cup<br>has a story.</h2>
-        <p>Talvez a próxima seja a sua.</p>
-        <a href="#inscricao">Voltar ao formulário ↑</a>
+
+        <h2>
+          Every cup<br>
+          has a story.
+        </h2>
+
+        <p>
+          Talvez a próxima seja a sua.
+        </p>
+
+        <a href="#inscricao">
+          Voltar ao formulário ↑
+        </a>
+
       </div>
+
     </section>
+
   </main>
 
+
   <footer>
-    <span>EVER AFTER COFFEE</span>
-    <span>A LITTLE MAGIC BETWEEN CHAPTERS</span>
-    <span>♛ 2026</span>
+
+    <span>
+      EVER AFTER COFFEE
+    </span>
+
+    <span>
+      A LITTLE MAGIC BETWEEN CHAPTERS
+    </span>
+
+    <span>
+      ♛ 2026
+    </span>
+
   </footer>
 
+
   <script src="script.js"></script>
+
 </body>
 </html>
