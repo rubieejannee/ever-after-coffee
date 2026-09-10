@@ -1,6 +1,6 @@
 const CONFIG = {
   // Cole aqui a URL /exec do seu Google Apps Script.
-  GOOGLE_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbzJ4PCAv53yzXUcgCuVhwA0AOniqV7jFyf5hFB_57ZcD3-5JfZhxf7lEJfzP-aijnqa0Q/exec"
+  GOOGLE_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbxbxfXODfzDb1BnbENvLIRCye6BKYUaD13-WwAPar7FtmCYD-TgjghwVyF8Os6uBxMgrQ/exec"
 };
 
 const entryScreen = document.getElementById("entryScreen");
@@ -102,10 +102,12 @@ musicToggle.addEventListener("click", async () => {
   }
 });
 
-function openCharacterPanel() {
-  renderCharacters();
+async function openCharacterPanel() {
   characterPanel.hidden = false;
   characterOpenBtn.setAttribute("aria-expanded", "true");
+  renderCharacters();
+  await loadTakenCharactersFromGoogle();
+  renderCharacters();
 }
 
 function closeCharacterPanel() {
@@ -116,8 +118,13 @@ function closeCharacterPanel() {
 characterOpenBtn.addEventListener("click", () => characterPanel.hidden ? openCharacterPanel() : closeCharacterPanel());
 characterCloseBtn.addEventListener("click", closeCharacterPanel);
 
+function normalizeCharacterName(name) {
+  return String(name || "").trim().toLowerCase().replace(/\\s+/g, " ");
+}
+
 function getAvailableCharacters() {
-  return uniqueCharacters.filter(name => !takenCharacters.has(name));
+  const takenNormalized = new Set([...takenCharacters].map(normalizeCharacterName));
+  return uniqueCharacters.filter(name => !takenNormalized.has(normalizeCharacterName(name)));
 }
 
 function renderCharacters() {
@@ -139,7 +146,11 @@ function renderCharacters() {
 }
 
 function chooseCharacter(name) {
-  if (takenCharacters.has(name)) return;
+  if (getAvailableCharacters().every(item => normalizeCharacterName(item) !== normalizeCharacterName(name))) {
+    setStatus("Esse personagem já foi escolhido. Atualize a lista e escolha outro.", "error");
+    loadTakenCharactersFromGoogle();
+    return;
+  }
   characterInput.value = name;
   selectedCharacter.innerHTML = "✓ <strong></strong> escolhido(a) para sua candidatura.";
   selectedCharacter.querySelector("strong").textContent = name;
@@ -160,32 +171,44 @@ function loadLocalTakenCharacters() {
 
 // Consulta as inscrições reais na planilha através do doGet/JSONP do Apps Script.
 function loadTakenCharactersFromGoogle() {
-  if (!isBackendConfigured()) return;
+  if (!isBackendConfigured()) return Promise.resolve();
 
-  const callbackName = "eacCharactersCallback_" + Date.now();
-  const script = document.createElement("script");
-  const timeout = setTimeout(cleanup, 7000);
+  return new Promise(resolve => {
+    const callbackName = "eacCharactersCallback_" + Date.now() + "_" + Math.random().toString(36).slice(2);
+    const script = document.createElement("script");
+    const timeout = setTimeout(() => {
+      cleanup();
+      resolve();
+    }, 8000);
 
-  function cleanup() {
-    clearTimeout(timeout);
-    script.remove();
-    try { delete window[callbackName]; } catch (e) { window[callbackName] = undefined; }
-  }
-
-  window[callbackName] = data => {
-    if (data && Array.isArray(data.taken)) {
-      data.taken.forEach(name => takenCharacters.add(String(name)));
-      saveTakenCharacters();
-      renderCharacters();
+    function cleanup() {
+      clearTimeout(timeout);
+      script.remove();
+      try { delete window[callbackName]; } catch (e) {}
     }
-    cleanup();
-  };
 
-  script.onerror = cleanup;
-  script.src = CONFIG.GOOGLE_SCRIPT_URL + "?callback=" + encodeURIComponent(callbackName) + "&t=" + Date.now();
-  document.body.appendChild(script);
+    window[callbackName] = data => {
+      if (data && Array.isArray(data.taken)) {
+        takenCharacters = new Set(data.taken.map(name => String(name).trim()).filter(Boolean));
+        saveTakenCharacters();
+        renderCharacters();
+      }
+      cleanup();
+      resolve();
+    };
+
+    script.onerror = () => {
+      cleanup();
+      resolve();
+    };
+
+    const separator = CONFIG.GOOGLE_SCRIPT_URL.includes("?") ? "&" : "?";
+    script.src = CONFIG.GOOGLE_SCRIPT_URL + separator +
+      "callback=" + encodeURIComponent(callbackName) + "&t=" + Date.now();
+
+    document.body.appendChild(script);
+  });
 }
-
 function setStatus(message, type) {
   statusEl.textContent = message;
   statusEl.className = "form-status " + (type || "");
